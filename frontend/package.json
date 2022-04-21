@@ -6,6 +6,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@sanity/block-content-to-react": "^3.0.0",
+    "@sanity/image-url": "^1.0.1",
     "babel-plugin-styled-components": "^2.0.6",
     "get-youtube-id": "^1.0.1",
     "next": "latest",

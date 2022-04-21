@@ -1,57 +1,73 @@
-import { GetStaticProps } from "next";
-import styled from "styled-components";
-//import ArticleList from "../components/ArticleList";
-import CardList from "../components/CardList";
-import { server } from "../config";
-import { IndexPageProps } from "../Interfaces";
+import imageUrlBuilder from "@sanity/image-url";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { GetServerSideProps } from "next";
 
-const Hero = styled.div`
-  height: 30vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #fff;
-`;
+export default function Home({ posts: posts }: any) {
+  const router = useRouter();
+  const [mappedPosts, setMappedPosts] = useState([]);
 
-const Heading = styled.h1`
-  color: #000;
-  font-size: 10rem;
-  font-weight: 900;
-`;
+  useEffect(() => {
+    if (posts.length) {
+      const imgBuilder = imageUrlBuilder({
+        projectId: "pxz77rs4",
+        dataset: "production",
+      });
 
-export default function Home({ data }: IndexPageProps) {
-  //console.log(data);
+      setMappedPosts(
+        posts.map((p: any) => {
+          return {
+            ...p,
+            mainImage: imgBuilder.image(p.mainImage).width(500).height(250),
+          };
+        })
+      );
+    } else {
+      setMappedPosts([]);
+    }
+  }, [posts]);
+
   return (
-    <>
-      <Hero>
-        <Heading>NEXT</Heading>
-      </Hero>
-      <CardList data={data} />
-    </>
+    <div>
+      <div>
+        <h1>Bienvenido a mi Blog</h1>
+        <h3>Recent Posts:</h3>
+        <div>
+          {mappedPosts.length ? (
+            mappedPosts.map((p: any, index) => (
+              <div
+                onClick={() => router.push(`/post/${p.slug.current}`)}
+                key={index}
+              >
+                <h3>{p.title}</h3>
+                <img src={p.mainImage} />
+              </div>
+            ))
+          ) : (
+            <>No Posts Yet</>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
 
-//getStaticProps
-// export const getStaticProps: GetStaticProps = async () => {
-//   const res = await fetch(
-//     "https://jsonplaceholder.typicode.com/posts?_limit=8"
-//   );
-//   const data = await res.json();
+export const getServerSideProps: GetServerSideProps = async () => {
+  const query = encodeURIComponent('*[ _type == "post" ]');
+  const url = `https://pxz77rs4.api.sanity.io/v1/data/query/production?query=${query}`;
+  const result = await fetch(url).then((res) => res.json());
 
-//   return {
-//     props: {
-//       data,
-//     },
-//   };
-// };
-
-export const getStaticProps: GetStaticProps = async () => {
-  const res = await fetch(`${server}/api/articles`);
-  const data = await res.json();
-
-  return {
-    props: {
-      data,
-    },
-  };
+  if (!result.result || !result.result.length) {
+    return {
+      props: {
+        posts: [],
+      },
+    };
+  } else {
+    return {
+      props: {
+        posts: result.result,
+      },
+    };
+  }
 };

@@ -1,4 +1,4 @@
-import { IndexPageProps } from "../Interfaces";
+//import { IndexPageProps } from "../Interfaces";
 //import styles from "../styles/Card.module.css";
 import CardItem from "../components/CardItem.tsx";
 import styled from "styled-components";
@@ -10,10 +10,17 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
-const CardList = ({ data }: IndexPageProps) => {
+/* 
+Pendiente
+
+export default function Home({ posts }: IndexPageProps) { 
+  
+*/
+
+const CardList = ({ data }: any) => {
   return (
     <Wrapper>
-      {data.map((article, index) => (
+      {data.map((article: any, index: any) => (
         <CardItem data={article} key={index} />
       ))}
     </Wrapper>

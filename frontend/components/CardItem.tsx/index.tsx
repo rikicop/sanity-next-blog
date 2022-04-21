@@ -1,7 +1,7 @@
 //import styles from "../../styles/Article.module.css";
 import styled from "styled-components";
 import Link from "next/link";
-import { ArticleItemProps } from "../../Interfaces";
+//import { ArticleItemProps } from "../../Interfaces";
 import Image from "next/image";
 
 const CardContainer = styled.div`
@@ -55,7 +55,7 @@ const CardContainer = styled.div`
   }
 `;
 
-const CardItem = ({ data }: ArticleItemProps) => {
+const CardItem = ({ data }: any) => {
   return (
     <CardContainer>
       {/*  <Link href={`/article/${data.id}`}>
