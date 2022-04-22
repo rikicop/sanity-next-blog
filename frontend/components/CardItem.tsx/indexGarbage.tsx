@@ -1,8 +1,8 @@
 //import styles from "../../styles/Article.module.css";
 import styled from "styled-components";
-//import Link from "next/link";
+import Link from "next/link";
 //import { ArticleItemProps } from "../../Interfaces";
-//import Image from "next/image";
+import Image from "next/image";
 
 const CardContainer = styled.div`
   overflow: hidden;
@@ -58,7 +58,32 @@ const CardContainer = styled.div`
 const CardItem = ({ data }: any) => {
   return (
     <CardContainer>
-      <h3 className="card-title">{data.title}</h3>
+      {/*  <Link href={`/article/${data.id}`}>
+        <a>  */}
+      <div className="card-body">
+        <div className="image-wrapper">
+          {/* Los numeros height y width son la resolucion original de la imagen */}
+          <Link href={`/article/${data.id}`}>
+            <a>
+              <Image src={data.picture} alt="receta" height={267} width={400} />
+            </a>
+          </Link>
+        </div>
+        <Link href={`/article/${data.id}`}>
+          <a>
+            {" "}
+            <h3 className="card-title">{data.title}</h3>
+            <p className="card-excerpt">{data.excerpt}</p>
+          </a>
+        </Link>
+      </div>
+      <div className="btn-wrapper">
+        <Link href={`/article/${data.id}`}>
+          <a>
+            <button className="card-btn">Ver Receta</button>
+          </a>
+        </Link>
+      </div>
     </CardContainer>
   );
 };

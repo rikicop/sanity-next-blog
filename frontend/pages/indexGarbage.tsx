@@ -1,11 +1,10 @@
 import imageUrlBuilder from "@sanity/image-url";
 import { useState, useEffect } from "react";
-//import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
-import CardList from "../components/CardList";
 
 export default function Home({ posts: posts }: any) {
-  //const router = useRouter();
+  const router = useRouter();
   const [mappedPosts, setMappedPosts] = useState([]);
 
   useEffect(() => {
@@ -35,7 +34,15 @@ export default function Home({ posts: posts }: any) {
         <h3>Recent Posts:</h3>
         <div>
           {mappedPosts.length ? (
-            <CardList data={mappedPosts} />
+            mappedPosts.map((p: any, index) => (
+              <div
+                onClick={() => router.push(`/post/${p.slug.current}`)}
+                key={index}
+              >
+                <h3>{p.title}</h3>
+                <img src={p.mainImage} />
+              </div>
+            ))
           ) : (
             <>No Posts Yet</>
           )}
