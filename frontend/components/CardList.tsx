@@ -1,6 +1,6 @@
 //import { IndexPageProps } from "../Interfaces";
 //import styles from "../styles/Card.module.css";
-import CardItem from "../components/CardItem.tsx";
+import CardItem from "./CardItem";
 import styled from "styled-components";
 
 const Wrapper = styled.div`

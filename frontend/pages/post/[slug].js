@@ -66,6 +66,8 @@ const Post = ({ title, body, image }) => {
     setImageUrl(imgBuilder.image(image));
   }, [image]);
 
+  console.log("image: ", image);
+  console.log("imageUrl: ", imageUrl);
   return (
     <Section>
       <h1 className="title">{title}</h1>
