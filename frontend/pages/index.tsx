@@ -105,7 +105,7 @@ export default function Home({ posts: posts }: any) {
                     <img src={p.mainImage} alt={p.title} />
                   </div>
                   <h3 className="card-title">{p.title}</h3>
-                  <p className="card-excerpt">{p?.title}</p>
+                  <p className="card-excerpt">{p?.excerpt}</p>
                 </div>
                 <div
                   className="btn-wrapper"
