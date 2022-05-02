@@ -39,7 +39,7 @@ Puedo tratar al post como un tipo más, por que ya lo había creado en el schema
       Hiciste un BackUp en pcloud en Documents en enviromental_vars
       bajo el nombre de "sanity-project-comments"
 
-- 17:26 - [Sanity.js]
+- 17:26 - [Sanity.js](#sanity-js)
 
   - Crear en el frontend lib/sanity.js
 
