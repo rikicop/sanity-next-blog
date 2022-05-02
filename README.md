@@ -1,11 +1,3 @@
-## About The Architecture
-
-- lib/api.js -> Aquí están los queries para manejar los datos.
-
-- pages/api/createComment.js -> Aquí se crea el comentario, enviando datos a sanity.io, incluyendo el token de la API.
-
-- lib/sanity.js -> Aquí se realiza la configuración necesaria para la conexión con la Api de sanity.io. a través del cliente sanity/client.
-
 ## About Enviroment Variables
 
 - Van en el frontend
@@ -21,7 +13,7 @@ https://www.youtube.com/watch?v=NzUNMUHxvZ4
 
 - 9:18 - [Schema](#comment-schema)
 
-- 17:26 - [Reference]
+- 17:26 - [Reference](#reference)
 
 Puedo tratar al post como un tipo más, por que ya lo había creado en el schema anteriomente.
 
@@ -40,18 +32,18 @@ Puedo tratar al post como un tipo más, por que ya lo había creado en el schema
 
       - Env variables para configurar tu proyecto.
 
-      * NEXT_PUBLIC_SANITY_PROJECT_ID
-      * SANITY_API_TOKEN
-      * SANITY_PREVIEW_SECRET
+      - NEXT_PUBLIC_SANITY_PROJECT_ID
+      - SANITY_API_TOKEN
+      - SANITY_PREVIEW_SECRET
 
       Hiciste un BackUp en pcloud en Documents en enviromental_vars
       bajo el nombre de "sanity-project-comments"
 
 - 17:26 - [Sanity.js]
 
-* Crear en el frontend lib/sanity.js
+  - Crear en el frontend lib/sanity.js
 
-* Instala el cliente de sanity.js -> @sanity/client
+  - Instala el cliente de sanity.js -> @sanity/client
 
 - 36:00 - [Form](#form)
 
@@ -59,6 +51,8 @@ Puedo tratar al post como un tipo más, por que ya lo había creado en el schema
   - 53:20 Create comment function
   - 1:00:00 Traer los datos del formulario a la Api de Next.js
   - Create createComment.js
+
+## About The Architecture
 
 - lib/api.js -> Aquí están los queries para manejar los datos.
 
