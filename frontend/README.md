@@ -32,18 +32,3 @@ This is an amalgamation of the 2 existing examples:
 
 - [with-typescript](https://github.com/vercel/next.js/tree/canary/examples/with-typescript)
 - [with-styled-components](https://github.com/vercel/next.js/tree/canary/examples/with-styled-components)
-
-## About The Architecture
-
-- lib/api.js -> Aquí están los queries para manejar los datos.
-
-- pages/api/createComment.js -> Aquí se crea el comentario, enviando datos a sanity.io, incluyendo el token de la API.
-
-- lib/sanity.js -> Aquí se realiza la configuración necesaria para conexión con sanity.io. a través de sanity/client.
-
-## About Enviroment Variables
-
-- Van en el frontend
-
-- Hiciste un BackUp en pcloud en Documents en enviromental_vars
-  bajo el nombre de "sanity-project-comments"
