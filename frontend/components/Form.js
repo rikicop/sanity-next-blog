@@ -3,12 +3,14 @@ import { useForm } from "react-hook-form";
 
 const FormBox = styled.div`
   display: flex;
-  background-color: darkcyan;
+  background-color: white;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: left;
+  justify-content: left;
   width: 100%;
   height: 100%;
+  margin-right: 5%;
+  margin-left: 5%;
   padding: 20px;
   form {
     input,
@@ -20,12 +22,15 @@ const FormBox = styled.div`
       border: 0;
       border-radius: 5px;
       font-size: 20px;
+      box-shadow: 5px 3px 2px 1px rgba(0 0 0 / 66%);
     }
     .formBtn {
       margin: 1rem 0 1rem 0;
       border-radius: 10px;
+      background-color: rgb(232, 187, 23);
+
       :hover {
-        background-color: rgb(245, 245, 78);
+        background-color: #0b8232;
         transition: 1s background ease;
       }
     }
@@ -48,9 +53,13 @@ export const Form = ({ _id }) => {
 
   return (
     <FormBox>
+      <h5 style={{ color: "rgb(232, 187, 23)" }}>Te gustó el post?</h5>
+      <h3> Deja un comentario </h3>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <label> Name </label>
         <input className="name" {...register("name", { required: true })} />
         {errors.name && <p>Name is required.</p>}
+        <label> Comment </label>
         <textarea
           className="comment"
           {...register("text", { required: true })}

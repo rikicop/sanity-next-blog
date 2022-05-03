@@ -57,6 +57,25 @@ const Section = styled.section`
   }
 `;
 
+const formContainer = {
+  display: "flex",
+  justifyContent: "center",
+};
+
+const commentsContainer = {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "left",
+  alignItems: "left",
+  marginTop: "1rem",
+  marginRight: "5%",
+  marginBottom: "1rem",
+  marginLeft: "5%",
+  padding: "1rem",
+  border: "1px solid #ccc",
+  borderRadius: "5px",
+};
+
 const Post = ({ post }) => {
   const [imageUrl, setImageUrl] = useState("");
   useEffect(() => {
@@ -97,14 +116,27 @@ const Post = ({ post }) => {
           dataset="production"
         ></SanityBlockContent>
       </div>
-      <Form _id={post._id} />
-      {JSON.stringify(post.comments)}
-      {post.comments.map((comment) => (
-        <div>
-          <h3>{comment.name}</h3>
-          <p>{comment.text}</p>
-        </div>
-      ))}
+      <div style={formContainer}>
+        <Form _id={post._id} />
+      </div>
+      {/* {JSON.stringify(post.comments)} */}
+      <div style={commentsContainer}>
+        <h3>Comentarios</h3>
+        <hr
+          style={{
+            border: "0",
+            background: "#333",
+            height: "1px",
+            backgroundImage: "linear-gradient(to right, #ccc, #333, #ccc)",
+          }}
+        />
+        {post.comments.map((comment, index) => (
+          <div key={index}>
+            <h3>{comment.name}</h3>
+            <p>{comment.text}</p>
+          </div>
+        ))}
+      </div>
     </Section>
   );
 };
