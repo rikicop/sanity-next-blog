@@ -31,23 +31,26 @@ const CardContainer = styled.div`
 
   .card-body {
     .image-wrapper {
+      height: 220px;
       img {
-        height: 100%;
         width: 100%;
+        height: 100%;
         object-fit: cover;
         filter: brightness(95%);
       }
     }
-    .card-title {
-      margin: 1rem;
-    }
-    .card-excerpt {
-      padding: 0 1rem;
+    .card-info {
+      .card-title {
+        margin: 1rem;
+      }
+      .card-excerpt {
+        padding: 0 1rem;
+      }
     }
   }
   .btn-wrapper {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     .card-btn {
       padding: 1rem;
       font-family: inherit;
@@ -104,8 +107,10 @@ export default function Home({ posts: posts }: any) {
                   >
                     <img src={p.mainImage} alt={p.title} />
                   </div>
-                  <h3 className="card-title">{p.title}</h3>
-                  <p className="card-excerpt">{p?.excerpt}</p>
+                  <div className="card-info">
+                    <h3 className="card-title">{p.title}</h3>
+                    <p className="card-excerpt">{p?.excerpt}</p>
+                  </div>
                 </div>
                 <div
                   className="btn-wrapper"

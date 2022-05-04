@@ -119,7 +119,7 @@ const Post = ({ post }) => {
       <div style={formContainer}>
         <Form _id={post._id} />
       </div>
-      {/* {JSON.stringify(post.comments)} */}
+      {/*  {JSON.stringify(post.comments)} */}
       <div style={commentsContainer}>
         <h3>Comentarios</h3>
         <hr
@@ -130,12 +130,14 @@ const Post = ({ post }) => {
             backgroundImage: "linear-gradient(to right, #ccc, #333, #ccc)",
           }}
         />
-        {post.comments.map((comment, index) => (
-          <div key={index}>
-            <h3>{comment.name}</h3>
-            <p>{comment.text}</p>
-          </div>
-        ))}
+        {post.comments.map((comment, index) => {
+          return comment.approved ? (
+            <div key={index}>
+              <h3 style={{ color: "rgb(232, 187, 23)" }}>{comment.name}</h3>
+              <p>{comment.text}</p>
+            </div>
+          ) : null;
+        })}
       </div>
     </Section>
   );

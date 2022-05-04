@@ -19,7 +19,7 @@ const FormBox = styled.div`
       width: 100%;
       padding: 0.5rem 0.8rem 0.5rem 0.8rem;
       margin: 0.9vw 0;
-      border: 0;
+      border: 1px solid #ccc;
       border-radius: 5px;
       font-size: 20px;
       box-shadow: 5px 3px 2px 1px rgba(0 0 0 / 66%);
@@ -58,7 +58,7 @@ export const Form = ({ _id }) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <label> Name </label>
         <input className="name" {...register("name", { required: true })} />
-        {errors.name && <p>Name is required.</p>}
+        {errors.name && <p>Debe llenar este campo.</p>}
         <label> Comment </label>
         <textarea
           className="comment"
