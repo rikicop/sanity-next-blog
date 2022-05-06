@@ -14,6 +14,11 @@ export default {
       readOnly: true,
     },
     {
+      name: "approved",
+      type: "boolean",
+      defaultValue: false,
+    },
+    {
       name: "post",
       type: "reference",
       to: [{ type: "post" }],

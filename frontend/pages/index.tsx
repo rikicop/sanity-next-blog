@@ -67,9 +67,13 @@ const CardContainer = styled.div`
   }
 `;
 
-export default function Home({ posts: posts }: any) {
+export default function Home({ posts: posts, authors: authors }: any) {
   const router = useRouter();
   const [mappedPosts, setMappedPosts] = useState([]);
+  const [mappedAuthors, setMappedAuthors] = useState([]);
+
+  console.log("mappedPosts: ", mappedPosts);
+  console.log("mappedAuthors: ", mappedAuthors);
 
   useEffect(() => {
     if (posts.length) {
@@ -77,7 +81,6 @@ export default function Home({ posts: posts }: any) {
         projectId: "pxz77rs4",
         dataset: "production",
       });
-
       setMappedPosts(
         posts.map((p: any) => {
           return {
@@ -90,6 +93,25 @@ export default function Home({ posts: posts }: any) {
       setMappedPosts([]);
     }
   }, [posts]);
+
+  useEffect(() => {
+    if (authors.length) {
+      const imgBuilder = imageUrlBuilder({
+        projectId: "pxz77rs4",
+        dataset: "production",
+      });
+      setMappedAuthors(
+        authors.map((p: any) => {
+          return {
+            ...p,
+            mainImage: imgBuilder.image(p.personalImage).width(500).height(250),
+          };
+        })
+      );
+    } else {
+      setMappedPosts([]);
+    }
+  }, [authors, posts, mappedAuthors]);
 
   return (
     <div>
@@ -112,12 +134,21 @@ export default function Home({ posts: posts }: any) {
                     <p className="card-excerpt">{p?.excerpt}</p>
                   </div>
                 </div>
-                <div
-                  className="btn-wrapper"
-                  onClick={() => router.push(`/post/${p.slug.current}`)}
-                >
-                  <button className="card-btn">Ver Artículo</button>
-                </div>
+                {authors.map((a: any, index: any) => (
+                  <div key={index}>
+                    <h3>{a.name}</h3>
+                    <img src={a.personalImage} alt={a.name} />
+                  </div>
+                ))}
+
+                {/*   {authors
+                  .filter((a: any) => a._id === p.author._ref)
+                  .map((a: any, index: any) => (
+                    <div key={index}>
+                      {a.name}
+                      <img src={a.personalImage} alt={a.name} />
+                    </div>
+                  ))} */}
               </CardContainer>
             ))
           ) : (
@@ -131,19 +162,29 @@ export default function Home({ posts: posts }: any) {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const query = encodeURIComponent('*[ _type == "post" ]');
+  const queryAuthor = encodeURIComponent('*[ _type == "author"]');
   const url = `https://pxz77rs4.api.sanity.io/v1/data/query/production?query=${query}`;
+  const urlAuthor = `https://pxz77rs4.api.sanity.io/v1/data/query/production?query=${queryAuthor}`;
   const result = await fetch(url).then((res) => res.json());
+  const resultAuthor = await fetch(urlAuthor).then((res) => res.json());
 
-  if (!result.result || !result.result.length) {
+  if (
+    !result.result ||
+    !result.result.length ||
+    !resultAuthor.result ||
+    !resultAuthor.result.length
+  ) {
     return {
       props: {
         posts: [],
+        authors: [],
       },
     };
   } else {
     return {
       props: {
         posts: result.result,
+        authors: resultAuthor.result,
       },
     };
   }

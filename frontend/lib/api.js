@@ -20,7 +20,7 @@ const postFields = `
   excerpt,
   'slug': slug.current,
   'coverImage': mainImage.asset->url,
-  'author': author->{name, 'picture': image.asset->url},
+  'author': author->{name, 'personalImage': personalImage.asset->url},
 `;
 
 const getClient = (preview) => (preview ? previewClient : client);
@@ -70,5 +70,6 @@ export async function getPostAndMorePosts(slug, preview) {
       { slug }
     ),
   ]);
+
   return { post, morePosts: getUniquePosts(morePosts) };
 }
